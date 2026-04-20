@@ -1,0 +1,41 @@
+// A Nossa Despensa — modelo local (SQLite). Migrável para Postgres/Supabase com o mesmo esquema.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id         String    @id @default(cuid())
+  barcode    String?   @unique
+  name       String
+  brand      String?
+  imageUrl   String?
+  quantity   Int       @default(0)
+  idealStock Int       @default(1)
+  unit       String    @default("un")
+  expiryDate DateTime?
+  category   String?
+  notes      String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  manualListItems ManualShoppingItem[]
+}
+
+/// Itens adicionados manualmente à lista (ex.: produtos sem código de barras).
+model ManualShoppingItem {
+  id        String   @id @default(cuid())
+  title     String
+  quantity  Int      @default(1)
+  unit      String   @default("un")
+  isDone    Boolean  @default(false)
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
