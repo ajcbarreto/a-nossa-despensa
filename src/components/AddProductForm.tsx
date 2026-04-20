@@ -12,6 +12,8 @@ type Props = {
   defaultBrand?: string | null;
   defaultImage?: string | null;
   defaultCategory?: string | null;
+  /** Para âncoras (`#id`) ao abrir «Novo produto» a partir da página inicial. */
+  formId?: string;
 };
 
 export function AddProductForm({
@@ -20,6 +22,7 @@ export function AddProductForm({
   defaultBrand,
   defaultImage,
   defaultCategory,
+  formId,
 }: Props) {
   const [pending, startTransition] = useTransition();
   const [stockQty, setStockQty] = useState(1);
@@ -32,6 +35,7 @@ export function AddProductForm({
 
   return (
     <form
+      id={formId}
       className="space-y-4 rounded-3xl border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-lg shadow-stone-400/12"
       action={(fd) =>
         startTransition(async () => {

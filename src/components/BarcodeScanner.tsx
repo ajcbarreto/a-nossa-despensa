@@ -42,7 +42,7 @@ export function BarcodeScanner({ onScan }: Props) {
           return;
         }
         await scanner.start(
-          { facingMode: "environment" },
+          { facingMode: "user" },
           {
             fps: 12,
             qrbox: { width: 300, height: 160 },

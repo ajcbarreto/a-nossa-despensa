@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { lookupBarcode } from "@/actions/lookup";
 import {
   addOneToStockByBarcode,
@@ -11,13 +11,24 @@ import { BarcodeScanner } from "@/components/BarcodeScanner";
 import { AddProductForm } from "@/components/AddProductForm";
 import { Loader2, Minus, Plus, RotateCcw } from "lucide-react";
 
-export function ScanExperience() {
+type ScanExperienceProps = {
+  /** Código vindo da URL (ex.: leitura a partir de fotografia na página inicial). */
+  initialBarcode?: string | null;
+  /** Abre o formulário de produto novo (query `?novo=1`). */
+  prefillManual?: boolean;
+};
+
+export function ScanExperience({
+  initialBarcode,
+  prefillManual,
+}: ScanExperienceProps = {}) {
   const [hint, setHint] = useState<string | null>(null);
   const [scannedCode, setScannedCode] = useState<string | null>(null);
   const [preview, setPreview] = useState<OffProductPreview | null>(null);
   const [offLookupFailed, setOffLookupFailed] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState<"add" | "remove" | null>(null);
   const last = useRef<{ code: string; at: number } | null>(null);
+  const urlBootstrap = useRef(false);
 
   const inChoiceOnly =
     scannedCode !== null && preview === null && !offLookupFailed;
@@ -29,6 +40,41 @@ export function ScanExperience() {
     setOffLookupFailed(false);
     setHint(null);
   }
+
+  useEffect(() => {
+    if (urlBootstrap.current) return;
+    if (initialBarcode) {
+      const c = initialBarcode.trim().replace(/\s/g, "");
+      if (/^\d{8,14}$/.test(c)) {
+        urlBootstrap.current = true;
+        last.current = null;
+        setScannedCode(c);
+        setPreview(null);
+        setOffLookupFailed(false);
+        setHint(
+          "Código lido. Escolhe se queres adicionar ou retirar uma unidade à despensa.",
+        );
+      }
+      return;
+    }
+    if (prefillManual) {
+      urlBootstrap.current = true;
+      setScannedCode(null);
+      setPreview(null);
+      setOffLookupFailed(false);
+      setHint("Preenche o formulário abaixo para adicionar um produto novo.");
+    }
+  }, [initialBarcode, prefillManual]);
+
+  useEffect(() => {
+    if (!prefillManual) return;
+    const id = window.setTimeout(() => {
+      document
+        .getElementById("novo-produto-form")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 120);
+    return () => window.clearTimeout(id);
+  }, [prefillManual]);
 
   const onScan = useCallback((code: string) => {
     const now = Date.now();
@@ -212,6 +258,7 @@ export function ScanExperience() {
           )}
           <AddProductForm
             key={scannedCode ?? "manual"}
+            formId="novo-produto-form"
             barcode={scannedCode ?? undefined}
             defaultName=""
             defaultBrand={undefined}

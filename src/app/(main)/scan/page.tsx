@@ -1,11 +1,20 @@
 import { ScanExperience } from "@/components/ScanExperience";
 
-export default function ScanPage() {
+type Props = {
+  searchParams: Promise<{ code?: string; novo?: string }>;
+};
+
+export default async function ScanPage({ searchParams }: Props) {
+  const sp = await searchParams;
+  const code = typeof sp.code === "string" ? sp.code : undefined;
+  const novo = sp.novo === "1" || sp.novo === "true";
+  const prefillManual = Boolean(novo && !code);
+
   return (
     <div className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-6 px-4 pb-4 pt-6">
       <header className="space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--muted)]">
-          Início
+          Scanner
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-[color:var(--foreground)]">
           Scanner
@@ -26,7 +35,10 @@ export default function ScanPage() {
         </p>
       </header>
 
-      <ScanExperience />
+      <ScanExperience
+        initialBarcode={code}
+        prefillManual={prefillManual}
+      />
     </div>
   );
 }

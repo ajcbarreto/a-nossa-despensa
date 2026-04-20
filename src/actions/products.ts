@@ -7,7 +7,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { normalizeStoredImageUrl } from "@/lib/image-url";
 
-const paths = ["/stock", "/compras", "/scan"] as const;
+const paths = ["/", "/stock", "/compras", "/scan"] as const;
 
 function refresh() {
   for (const p of paths) revalidatePath(p);
@@ -56,7 +56,7 @@ export async function addProduct(input: z.infer<typeof addSchema>) {
     throw e;
   }
   refresh();
-  redirect("/scan");
+  redirect("/");
 }
 
 const adjustSchema = z.object({

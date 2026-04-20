@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Package, ScanLine, ShoppingCart } from "lucide-react";
+import { Home, ScanLine, ShoppingCart } from "lucide-react";
 import clsx from "clsx";
 
 const items = [
+  { href: "/", label: "Início", Icon: Home },
   { href: "/scan", label: "Scanner", Icon: ScanLine },
-  { href: "/stock", label: "Stock", Icon: Package },
   { href: "/compras", label: "Compras", Icon: ShoppingCart },
 ] as const;
 
