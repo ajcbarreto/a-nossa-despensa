@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
     title: "Despensa",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#070a0f",
+  themeColor: "#f6f2ea",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",

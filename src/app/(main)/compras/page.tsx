@@ -27,7 +27,7 @@ export default async function ComprasPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--muted)]">
           Supermercado
         </p>
-        <h1 className="text-3xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-[color:var(--foreground)]">
           Lista de compras
         </h1>
         <p className="text-sm leading-relaxed text-[color:var(--muted)]">
@@ -41,7 +41,7 @@ export default async function ComprasPage() {
           Repor stock ideal
         </h2>
         {restock.length === 0 ? (
-          <p className="rounded-3xl border border-white/10 bg-[color:var(--surface-elevated)] px-5 py-8 text-center text-sm text-[color:var(--muted)]">
+          <p className="rounded-3xl border border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-5 py-8 text-center text-sm text-[color:var(--muted)] shadow-sm shadow-stone-400/10">
             Tudo acima ou igual ao stock ideal. Bom trabalho.
           </p>
         ) : (
@@ -65,7 +65,7 @@ export default async function ComprasPage() {
           <ul className="space-y-1 text-sm text-[color:var(--muted)]">
             {manualDone.map((m) => (
               <li key={m.id} className="line-through">
-                {m.title} · {m.quantity} {m.unit}
+                {m.title} · {m.quantity}
               </li>
             ))}
           </ul>

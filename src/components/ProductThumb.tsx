@@ -27,7 +27,7 @@ export function ProductThumb({
   return (
     <div
       className={clsx(
-        "relative shrink-0 overflow-hidden rounded-2xl bg-black/30",
+        "relative shrink-0 overflow-hidden rounded-2xl bg-[color:var(--input-bg)]",
         className,
       )}
     >

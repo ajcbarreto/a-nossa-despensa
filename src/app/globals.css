@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #070a0f;
-  --surface: #0f141c;
-  --surface-elevated: #151b26;
-  --accent: #34d399;
-  --accent-foreground: #042018;
-  --muted: #94a3b8;
-  --foreground: #f8fafc;
+  /* Linho / farinha — fundo acolhedor de cozinha */
+  --bg: #f6f2ea;
+  --surface: #fffcf7;
+  --surface-elevated: #ffffff;
+  --border: rgba(41, 37, 36, 0.1);
+  --border-strong: rgba(41, 37, 36, 0.16);
+  /* Campos — tom natural de papel */
+  --input-bg: #f0ebe2;
+  --panel-muted: #f3ede4;
+  /* Erva / horta — frescura alimentar */
+  --accent: #2f7d4e;
+  --accent-foreground: #ffffff;
+  --muted: #78716c;
+  --foreground: #1c1917;
 }
 
 @theme inline {
@@ -15,19 +22,24 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   min-height: 100dvh;
   background: radial-gradient(
       120% 80% at 50% -20%,
-      rgba(52, 211, 153, 0.18),
+      rgba(47, 125, 78, 0.12),
       transparent
     ),
     radial-gradient(
-      80% 50% at 100% 0%,
-      rgba(56, 189, 248, 0.08),
+      85% 55% at 100% 0%,
+      rgba(234, 179, 8, 0.09),
+      transparent
+    ),
+    radial-gradient(
+      70% 40% at 0% 100%,
+      rgba(251, 146, 60, 0.06),
       transparent
     ),
     var(--bg);
@@ -37,8 +49,8 @@ body {
 }
 
 ::selection {
-  background: rgba(52, 211, 153, 0.35);
-  color: #fff;
+  background: rgba(47, 125, 78, 0.22);
+  color: var(--foreground);
 }
 
 a {

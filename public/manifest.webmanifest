@@ -2,9 +2,9 @@
   "name": "A Nossa Despensa",
   "short_name": "Despensa",
   "description": "Stock e lista de compras para a cozinha.",
-  "start_url": "/stock",
+  "start_url": "/scan",
   "display": "standalone",
-  "background_color": "#070a0f",
-  "theme_color": "#070a0f",
+  "background_color": "#f6f2ea",
+  "theme_color": "#2f7d4e",
   "orientation": "portrait-primary"
 }

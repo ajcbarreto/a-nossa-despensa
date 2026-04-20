@@ -11,7 +11,6 @@ function refresh() {
 const addSchema = z.object({
   title: z.string().min(1, "Título obrigatório"),
   quantity: z.coerce.number().int().min(1),
-  unit: z.string().min(1).default("un"),
 });
 
 export async function addManualShoppingItem(
@@ -22,7 +21,7 @@ export async function addManualShoppingItem(
     data: {
       title: data.title.trim(),
       quantity: data.quantity,
-      unit: data.unit,
+      unit: "un",
     },
   });
   refresh();

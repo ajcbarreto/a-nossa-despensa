@@ -17,12 +17,12 @@ export default async function StockPage() {
           Despensa
         </p>
         <div className="flex items-end justify-between gap-4">
-          <h1 className="text-3xl font-bold tracking-tight text-white">
+          <h1 className="text-3xl font-bold tracking-tight text-[color:var(--foreground)]">
             Controlo de stock
           </h1>
           <Link
             href="/scan"
-            className="inline-flex min-h-[3rem] min-w-[3rem] items-center justify-center rounded-2xl bg-[color:var(--accent)] text-[color:var(--accent-foreground)] shadow-lg shadow-emerald-900/35 transition hover:brightness-110 active:scale-[0.98]"
+            className="inline-flex min-h-[3rem] min-w-[3rem] items-center justify-center rounded-2xl bg-[color:var(--accent)] text-[color:var(--accent-foreground)] shadow-[0_4px_16px_-2px_rgba(47,125,78,0.4)] transition hover:brightness-105 active:scale-[0.98]"
             aria-label="Adicionar com scanner"
           >
             <Plus className="h-7 w-7" strokeWidth={2.5} />
@@ -36,8 +36,8 @@ export default async function StockPage() {
 
       <section className="space-y-4">
         {products.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-white/15 bg-[color:var(--surface-elevated)]/60 px-6 py-14 text-center">
-            <p className="text-lg font-semibold text-white">
+          <div className="rounded-3xl border border-dashed border-[color:var(--border-strong)] bg-[color:var(--surface-elevated)] px-6 py-14 text-center shadow-sm shadow-stone-400/10">
+            <p className="text-lg font-semibold text-[color:var(--foreground)]">
               Ainda não há produtos
             </p>
             <p className="mt-2 text-sm text-[color:var(--muted)]">
