@@ -61,6 +61,13 @@ export function ProductCard({ product }: Props) {
               {product.brand}
             </p>
           ) : null}
+          {product.category ? (
+            <p className="mt-1.5 truncate text-xs">
+              <span className="inline-block max-w-full truncate rounded-full bg-[color:var(--panel-muted)] px-2.5 py-0.5 font-medium text-[color:var(--foreground)]/85 ring-1 ring-[color:var(--border)]">
+                {product.category}
+              </span>
+            </p>
+          ) : null}
           <div className="mt-3 h-2 overflow-hidden rounded-full bg-stone-200/90">
             <div
               className="h-full rounded-full bg-gradient-to-r from-[color:var(--accent)] to-emerald-500/85 transition-[width]"

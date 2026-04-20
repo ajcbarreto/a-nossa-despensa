@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { ProductCard } from "@/components/ProductCard";
+import { PantryStockView } from "@/components/PantryStockView";
 import { Plus } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +30,11 @@ export default async function StockPage() {
         </div>
         <p className="text-sm leading-relaxed text-[color:var(--muted)]">
           Toque grande para entrada e saída rápida. O stock ideal alimenta a
-          lista de compras.
+          lista de compras. Com código de barras, nome e categoria vêm do{" "}
+          <span className="font-medium text-[color:var(--foreground)]">
+            Open Food Facts
+          </span>{" "}
+          quando o produto existe na base.
         </p>
       </header>
 
@@ -52,7 +56,7 @@ export default async function StockPage() {
             </Link>
           </div>
         ) : (
-          products.map((p) => <ProductCard key={p.id} product={p} />)
+          <PantryStockView products={products} />
         )}
       </section>
     </div>

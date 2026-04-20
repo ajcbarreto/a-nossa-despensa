@@ -17,11 +17,15 @@ Aplicação web para controlo de stock da despensa e lista de compras alinhada a
 
 Cria um ficheiro `.env` a partir de `.env.example`.
 
-| Variável | Onde obter |
-|----------|------------|
-| **`DATABASE_URL`** | Supabase → **Project Settings** → **Database** → secção **Connection string** → modo **Direct connection** (host `db.…supabase.co`, porta **5432**). Cola a mesma variável na **Vercel** (Settings → Environment Variables) para Production (e Preview se quiseres). |
+| Variável | Obrigatória? | Onde obter |
+|----------|----------------|------------|
+| **`DATABASE_URL`** | **Sim** | Supabase → **Project Settings** → **Database** → **Direct connection** (porta **5432**). Mesmo valor na **Vercel** (Production / Preview). O Prisma usa isto para aceder ao Postgres. |
+| **`NEXT_PUBLIC_SUPABASE_URL`** | Não | Supabase → **Project Settings** → **API** → **Project URL**. Só é precisa se no futuro usares o cliente JavaScript (`@supabase/supabase-js`) no browser — **neste código não está em uso**. |
+| **`NEXT_PUBLIC_SUPABASE_ANON_KEY`** | Não | Supabase → **Project Settings** → **API** → **anon public**. Idem: só para Auth / Storage / Realtime com o SDK oficial; **não é lida pela app actual**. |
 
-Na **Vercel**, o ficheiro `vercel.json` corre `prisma migrate deploy` antes do `next build`, para criar/atualizar tabelas — o `DATABASE_URL` tem de estar definido no painel da Vercel. Em local, `npm run build` só compila (sem ligar à BD); para migrar manualmente: `npx prisma migrate deploy` com `.env` preenchido.
+Resumo: para a despensa tal como está, **basta `DATABASE_URL`**. As variáveis `NEXT_PUBLIC_*` são o padrão de outros projectos Supabase (cliente no cliente); aqui os dados vão sempre pelo **Prisma** no servidor.
+
+Na **Vercel**, o `vercel.json` corre `prisma migrate deploy` antes do `next build` — o `DATABASE_URL` tem de estar definido no painel. Em local, `npm run build` só compila; para migrar: `npx prisma migrate deploy` com `.env` preenchido.
 
 ## Desenvolvimento
 
